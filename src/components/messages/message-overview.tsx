@@ -3,28 +3,22 @@ import Typography from '@mui/material/Typography';
 
 import { _tasks, _posts, _timeline } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
-import CreateAccount  from 'src/components/account/CreateAccount';
+import Cardwidget from 'src/sections/overview/cardwidget';
+import { ListWidget } from 'src/sections/overview/list-widget';
+import { Applist } from '../app/applist';
+import { Messagelist } from './messagelist';
+// import { Applist } from './applist';
 
 
-import { AnalyticsNews } from '../analytics-news';
-import { AnalyticsTasks } from '../analytics-tasks';
-import { AnalyticsCurrentVisits } from '../analytics-current-visits';
-import { AnalyticsOrderTimeline } from '../analytics-order-timeline';
-import { AnalyticsWebsiteVisits } from '../analytics-website-visits';
-import { AnalyticsWidgetSummary } from '../analytics-widget-summary';
-import { AnalyticsTrafficBySite } from '../analytics-traffic-by-site';
-import { AnalyticsCurrentSubject } from '../analytics-current-subject';
-import { AnalyticsConversionRates } from '../analytics-conversion-rates';
-import Cardwidget from '../cardwidget';
-import { ListWidget } from '../list-widget';
+
 
 // ----------------------------------------------------------------------
 
-export function Accountoverview() {
+export function Messageoverview() {
   return (
     <DashboardContent maxWidth="xl" sx={{ height: '100vh', overflowY: 'auto' }}>
       <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>
-        Hi, Welcome back 👋
+        Hi, Welcome back 👋 Appp
       </Typography>
 
       <Grid container spacing={3}>
@@ -48,26 +42,11 @@ export function Accountoverview() {
         </Grid>
 
        
-
-       
-
-       
-
-       
-
-       
-
-       
-
         
 
         <Grid md={6} lg={12}>
           
-          <ListWidget title='Acount' list={_tasks} />
-        </Grid>
-        <Grid md={6} lg={12}>
-          
-          <CreateAccount/>
+          <Messagelist title='Messages' list={_tasks} />
         </Grid>
       </Grid>
     </DashboardContent>

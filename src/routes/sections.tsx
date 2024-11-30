@@ -90,6 +90,8 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export const Acounts = lazy(() => import('src/pages/account'));
 export const App = lazy(() => import('src/pages/app'));
 export const Register = lazy(() => import('src/pages/registers'));
+export const Message = lazy(() => import('src/pages/messages'));
+
 
 
 
@@ -143,7 +145,9 @@ export function Router() {
         { path: 'blog', element: <BlogPage /> }, // BlogPage route
         { path: 'account', element: <Acounts/> },  // Account route
         { path: 'app', element: <App/> },   // Application route 
-        {path :'register' ,element :<Register/> }  // Register route
+        {path :'register' ,element :<Register/> } , // Register route
+        {path :'messages' ,element :<Message/> }  // Register route
+
       ],
     },
 

@@ -48,7 +48,7 @@ export function Registeroverview() {
 
         <Grid md={6} lg={12}>
           
-          <Registerlist title='Acount' list={_tasks} />
+          <Registerlist title='Register' list={_tasks} />
         </Grid>
       </Grid>
     </DashboardContent>

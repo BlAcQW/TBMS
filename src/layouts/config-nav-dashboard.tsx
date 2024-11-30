@@ -58,4 +58,9 @@ export const navData = [
     path: '/register',
     icon: icon('ic-user'),
   },
+  {
+    title: 'Messages',
+    path: '/messages',
+    icon: icon('ic-user'),
+  },
 ];
