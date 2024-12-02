@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import AccountTable from 'src/components/account/account-overview';
 
 import { CONFIG } from 'src/config-global';
 

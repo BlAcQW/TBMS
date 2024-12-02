@@ -17,12 +17,13 @@ import { AnalyticsCurrentSubject } from '../analytics-current-subject';
 import { AnalyticsConversionRates } from '../analytics-conversion-rates';
 import Cardwidget from '../cardwidget';
 import { ListWidget } from '../list-widget';
+import AccountTable from 'src/components/account/account-overview';
 
 // ----------------------------------------------------------------------
 
 export function Accountoverview() {
   return (
-    <DashboardContent maxWidth="xl" sx={{ height: '100vh', overflowY: 'auto' }}>
+    <DashboardContent maxWidth="xl" >
       <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>
         Hi, Welcome back 👋
       </Typography>
@@ -61,14 +62,12 @@ export function Accountoverview() {
 
         
 
-        <Grid md={6} lg={12}>
+        <Grid md={12} lg={12}>
+        <AccountTable/>
           
-          <ListWidget title='Acount' list={_tasks} />
-        </Grid>
-        <Grid md={6} lg={12}>
           
-          <CreateAccount/>
         </Grid>
+        
       </Grid>
     </DashboardContent>
   );

@@ -12,74 +12,72 @@
 // import { useRouter } from 'src/routes/hooks';
 // import { Link as RouterLink } from 'react-router-dom';
 
+
 // import { Iconify } from 'src/components/iconify';
-// import { toast } from 'react-toastify'; // Add this for toasts
-// import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
-// import axios from 'axios';
 
 // // ----------------------------------------------------------------------
 
-// export function SignInView() {
+// export function SignUpView() {
 //   const router = useRouter();
 
 //   const [showPassword, setShowPassword] = useState(false);
-//   const [username, setUsername] = useState(''); // Controlled state for email
-//   const [password, setPassword] = useState(''); // Controlled state for password
-//   const [isLoading, setIsLoading] = useState(false); // Loading state
-//   const [loginToken, setLoginToken] = useState<string | null>(null);
 
-
-//   const handleSignIn = useCallback(async () => {
-//     setIsLoading(true); // Show loading state
-//     try {
-//       const response = await axios.post('http://15.236.117.108/tbms_rest_api/user/login', {
-//         username,
-//         password,
-//       });
-//        const res=response.data
-//       // Assuming the API response contains `id`, `token`, and `message`
-//       const id=res.data.id;
-//       const token =res.meta.token
-//       const message = res.message
-//       if (id && token) {
-//         sessionStorage.setItem('id', id); // Store id in sessionStorage
-//         sessionStorage.setItem('token', token); // Store token in sessionStorage
-//         toast.success(message || 'Sign-in successful!'); // Show success toast
-//         router.push('/account'); // Redirect to account page
-//       } else {
-//         toast.error(message || 'Failed to sign in. Please try again.');
-//       }
-//     } catch (error: any) {
-//       toast.error(
-//         error.response?.data?.message || 'An error occurred while signing in. Please try again.'
-//       ); // Show error toast
-//     } finally {
-//       setIsLoading(false); // Hide loading state
-//     }
-//   }, [username, password, router]);
+//   const handleSignIn = useCallback(() => {
+//     router.push('/account');
+//   }, [router]);
 
 //   const renderForm = (
 //     <Box display="flex" flexDirection="column" alignItems="flex-end">
+//         <TextField
+//         fullWidth
+//         name="name"
+//         label="Full Name"
+//         defaultValue="Enoch"
+//         InputLabelProps={{ shrink: true }}
+//         sx={{ mb: 3 }}
+//       />
 //       <TextField
 //         fullWidth
-//         name="username"
-//         label="Username"
-//         value={username}
-//         onChange={(e) => setUsername(e.target.value)}
+//         name="phone"
+//         label="Phone"
+//         defaultValue=""
+//         InputLabelProps={{ shrink: true }}
+//         sx={{ mb: 3 }}
+//       />
+//       <TextField
+//         fullWidth
+//         name="email"
+//         label="Email address"
+//         defaultValue="hello@gmail.com"
 //         InputLabelProps={{ shrink: true }}
 //         sx={{ mb: 3 }}
 //       />
 
-//       <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-//         Forgot password?
-//       </Link>
+     
 
 //       <TextField
 //         fullWidth
 //         name="password"
 //         label="Password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
+//         defaultValue="@demo1234"
+//         InputLabelProps={{ shrink: true }}
+//         type={showPassword ? 'text' : 'password'}
+//         InputProps={{
+//           endAdornment: (
+//             <InputAdornment position="end">
+//               <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+//                 <Iconify icon={showPassword ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+//               </IconButton>
+//             </InputAdornment>
+//           ),
+//         }}
+//         sx={{ mb: 3 }}
+//       />
+//       <TextField
+//         fullWidth
+//         name="password"
+//         label="Confirm Password"
+//         defaultValue="@demo1234"
 //         InputLabelProps={{ shrink: true }}
 //         type={showPassword ? 'text' : 'password'}
 //         InputProps={{
@@ -101,9 +99,8 @@
 //         color="inherit"
 //         variant="contained"
 //         onClick={handleSignIn}
-//         loading={isLoading} // Show spinner when loading
 //       >
-//         Sign in
+//         Create Now
 //       </LoadingButton>
 //     </Box>
 //   );
@@ -111,11 +108,11 @@
 //   return (
 //     <>
 //       <Box gap={1.5} display="flex" flexDirection="column" alignItems="center" sx={{ mb: 5 }}>
-//         <Typography variant="h5">Sign in</Typography>
+//         <Typography variant="h5">Sign Up</Typography>
 //         <Typography variant="body2" color="text.secondary">
-//           Don’t have an account?
-//           <Link variant="subtitle2" sx={{ ml: 0.5 }} component={RouterLink} to="/signup">
-//             Get started
+//            Have an account?
+//           <Link variant="subtitle2" sx={{ ml: 0.5 }} component={RouterLink} to='/'>
+//             Signin Now 
 //           </Link>
 //         </Typography>
 //       </Box>
@@ -147,7 +144,7 @@
 // }
 
 
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -157,100 +154,104 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import { useRouter } from 'src/routes/hooks';
 import { Link as RouterLink } from 'react-router-dom';
-
-import { Iconify } from 'src/components/iconify';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-export function SignInView() {
+
+import { Iconify } from 'src/components/iconify';
+
+export function SignUpView() {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
 
-  const handleSignIn = useCallback(async () => {
-    setIsLoading(true);
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState({ open: false, message: '', severity: 'success' });
+
+
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    if (formData.password !== formData.password_confirmation) {
+      setToast({ open: true, message: "Passwords don't match", severity: 'error' });
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await axios.post('http://15.236.117.108/tbms_rest_api/user/login', {
-        username,
-        password,
+      const response = await axios.post('http://15.236.117.108/tbms_rest_api/user/create', {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        password: formData.password,
+        password_confirmation :formData.password_confirmation,
+
       });
-
-      const res = response.data;
-      const id = res.data.id;
-      const token = res.meta.token;
-      const timeout = res.meta.timeout; // Get the timeout (in seconds)
-      const message = res.message;
-
-      if (id && token) {
-        // Store the token, id, and expiration time in sessionStorage
-        sessionStorage.setItem('id', id);
-        sessionStorage.setItem('token', token);
-        sessionStorage.setItem('expiration', `${Date.now() + timeout * 1000}`); // Convert to ms
-        toast.success(message || 'Sign-in successful!');
-        router.push('/account');
-
-        // Set a timeout to handle token expiration
-        setTimeout(() => {
-          handleLogout();
-        }, timeout * 1000);
-      } else {
-        toast.error(message || 'Failed to sign in. Please try again.');
-      }
-    } catch (error: any) {
-      toast.error(
-        error.response?.data?.message || 'An error occurred while signing in. Please try again.'
-      );
+      setToast({ open: true, message: 'Account created successfully!', severity: 'success' });
+      router.push('/'); // Navigate to Sign-in page
+    } catch (error) {
+      setToast({
+        open: true,
+        message: error.response?.data?.message || 'Failed to create account.',
+        severity: 'error',
+      });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  }, [username, password, router]);
+  };
 
-  // Handle user logout
-  const handleLogout = useCallback(() => {
-    sessionStorage.removeItem('id');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('expiration');
-    toast.info('Session expired. Please log in again.');
-    router.push('/signin'); // Redirect to sign-in page
-  }, [router]);
+  const handleCloseToast = () => setToast({ ...toast, open: false });
 
-  // Automatically check for token expiration on component mount
-  useEffect(() => {
-    const expiration = sessionStorage.getItem('expiration');
-    if (expiration && Date.now() > parseInt(expiration, 10)) {
-      handleLogout(); // Log out if the token is already expired
-    }
-  }, [handleLogout]);
+  const handleInputChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [field]: event.target.value });
+  };
 
   const renderForm = (
     <Box display="flex" flexDirection="column" alignItems="flex-end">
       <TextField
         fullWidth
-        name="username"
-        label="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        name="name"
+        label="Full Name"
+        value={formData.name}
+        onChange={handleInputChange('name')}
         InputLabelProps={{ shrink: true }}
         sx={{ mb: 3 }}
       />
-
-      <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-        Forgot password?
-      </Link>
-
+      <TextField
+        fullWidth
+        name="phone"
+        label="Phone"
+        value={formData.phone}
+        onChange={handleInputChange('phone')}
+        InputLabelProps={{ shrink: true }}
+        sx={{ mb: 3 }}
+      />
+      <TextField
+        fullWidth
+        name="email"
+        label="Email address"
+        value={formData.email}
+        onChange={handleInputChange('email')}
+        InputLabelProps={{ shrink: true }}
+        sx={{ mb: 3 }}
+      />
       <TextField
         fullWidth
         name="password"
         label="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={formData.password}
+        onChange={handleInputChange('password')}
         InputLabelProps={{ shrink: true }}
         type={showPassword ? 'text' : 'password'}
         InputProps={{
@@ -264,17 +265,35 @@ export function SignInView() {
         }}
         sx={{ mb: 3 }}
       />
-
+      <TextField
+        fullWidth
+        name="password_confirmation"
+        label="Confirm Password"
+        value={formData.password_confirmation}
+        onChange={handleInputChange('password_confirmation')}
+        InputLabelProps={{ shrink: true }}
+        type={showPassword ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                <Iconify icon={showPassword ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        sx={{ mb: 3 }}
+      />
       <LoadingButton
         fullWidth
         size="large"
         type="submit"
         color="inherit"
         variant="contained"
-        onClick={handleSignIn}
-        loading={isLoading}
+        loading={loading}
+        onClick={handleSubmit}
       >
-        Sign in
+        Create Now
       </LoadingButton>
     </Box>
   );
@@ -282,11 +301,11 @@ export function SignInView() {
   return (
     <>
       <Box gap={1.5} display="flex" flexDirection="column" alignItems="center" sx={{ mb: 5 }}>
-        <Typography variant="h5">Sign in</Typography>
+        <Typography variant="h5">Sign Up</Typography>
         <Typography variant="body2" color="text.secondary">
-          Don’t have an account?
-          <Link variant="subtitle2" sx={{ ml: 0.5 }} component={RouterLink} to="/signup">
-            Get started
+          Have an account?
+          <Link variant="subtitle2" sx={{ ml: 0.5 }} component={RouterLink} to="/">
+            Signin Now
           </Link>
         </Typography>
       </Box>
@@ -313,8 +332,17 @@ export function SignInView() {
           <Iconify icon="ri:twitter-x-fill" />
         </IconButton>
       </Box>
+
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={4000}
+        onClose={handleCloseToast}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseToast} severity={toast.severity as any} sx={{ width: '100%' }}>
+          {toast.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
-
-

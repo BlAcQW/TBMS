@@ -7,6 +7,8 @@ import Cardwidget from 'src/sections/overview/cardwidget';
 import { ListWidget } from 'src/sections/overview/list-widget';
 import { Applist } from '../app/applist';
 import { Registerlist } from './register-list';
+import NewRegister from './NewRegister';
+import RegisterTable from './RegisterTable';
 
 
 
@@ -46,10 +48,11 @@ export function Registeroverview() {
        
         
 
-        <Grid md={6} lg={12}>
+        <Grid md={12} lg={12}>
           
-          <Registerlist title='Register' list={_tasks} />
+          <RegisterTable/>
         </Grid>
+       
       </Grid>
     </DashboardContent>
   );

@@ -39,9 +39,16 @@ const CreateApp = () => {
     <div>
       {/* Button to open Dialog */}
      
-      <Button onClick={handleClickOpen} variant="contained" startIcon={<CreateIcon />}>
-        Create Application
-      </Button>
+      
+      <Button
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+            startIcon={<CreateIcon/>}
+            sx={{ marginRight: '10px' }}
+          >
+            Create
+          </Button>
 
       {/* Material UI Dialog */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">

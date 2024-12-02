@@ -18,10 +18,8 @@ import CreateIcon from '@mui/icons-material/Create';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'; // MUI DatePicker component
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Refresh as RefreshIcon } from '@mui/icons-material';
 
-
-const CreateAccount = () => {
+const NewRegister = () => {
   const [vendorId, setVendorId] = useState('');
   const [vendorNumber, setVendorNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -40,21 +38,20 @@ const CreateAccount = () => {
   return (
     <div>
       {/* Button to open Dialog */}
+     
       <Button
             variant="contained"
             color="primary"
             onClick={handleClickOpen}
-            startIcon={<RefreshIcon />}
+            startIcon={<CreateIcon/>}
             sx={{ marginRight: '10px' }}
           >
             Create
           </Button>
-     
-      
 
       {/* Material UI Dialog */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle>Create Account</DialogTitle>
+        <DialogTitle>Register New </DialogTitle>
         <DialogContent>
           <Grid container spacing={3}>
             {/* Vendor ID */}
@@ -195,4 +192,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default NewRegister;

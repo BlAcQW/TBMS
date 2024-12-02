@@ -7,6 +7,7 @@ import Cardwidget from 'src/sections/overview/cardwidget';
 import { ListWidget } from 'src/sections/overview/list-widget';
 import { Applist } from './applist';
 import CreateApp from './CreateApp';
+import AppTable from './AppTable';
 
 
 
@@ -54,14 +55,11 @@ export function Appoverview() {
 
         
 
-        <Grid md={6} lg={12}>
+        <Grid md={12} lg={12}>
           
-          <Applist title='Acount' list={_tasks} />
+          <AppTable/>
         </Grid>
-        <Grid md={6} lg={12}>
-          
-          <CreateApp/>
-        </Grid>
+      
       </Grid>
     </DashboardContent>
   );
